@@ -1,0 +1,93 @@
+.file-view-wrapper{
+    padding: 3rem 0;
+}
+
+.file-header h1{
+    font-weight: 700;
+}
+
+.file-image img{
+    height: 400px;
+    width: 100%;
+}
+
+.file-image img:hover{
+    transform: scale(1.07);
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.07);
+    -ms-transform: scale(1.07);
+    -o-transform: scale(1.07);
+    transition: all 2s;
+    -webkit-transition: all 2s;
+    -moz-transition: all 2s;
+    -ms-transition: all 2s;
+    -o-transition: all 2s;
+}
+
+.file-icons ul{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.file-icons li{
+    margin-left: 1.6rem;
+    cursor: pointer;
+}
+
+.file-icons li a{
+    margin-left: 0.8rem;
+    color: black;
+}
+
+.a-1{
+    color: white;
+    background-color: #335314;
+    padding: 0.4rem 0.9rem;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+.view a{
+    color: white !important;
+}
+.dwld{
+    background-color: red;
+    color: white !important;
+}
+
+.share{
+    background-color: blue;
+    color: white !important;
+}
+
+.dwld a{
+    color: white !important;
+}
+
+.share a{
+    color: white !important;
+}
+
+.description{
+    margin-top: 3rem;
+}
+
+.description p{
+    text-align: justify;
+}
+
+.description h3{
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.file-date p{
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgb(31, 30, 30);
+}

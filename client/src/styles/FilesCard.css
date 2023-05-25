@@ -1,0 +1,50 @@
+.file-card{
+   margin-bottom: 1rem;
+   border-radius: 10px;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   -ms-border-radius: 10px;
+   -o-border-radius: 10px;
+}
+
+.file-card:hover{
+    transition: all 1s;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -ms-transition: all 1s;
+    -o-transition: all 1s;
+    transform: scale(1.03);
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+}
+
+.file-card img{
+    height: 250px;
+    object-fit: cover;
+}
+
+.icons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.actions-icons{
+    list-style-type: none;
+}
+
+.actions-icons li{
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.ic{
+    margin-right: 3rem;
+}
+
+.dot-lines{
+    cursor: pointer;
+    font-size: 1.3rem;
+}

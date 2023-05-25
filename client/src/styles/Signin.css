@@ -1,0 +1,89 @@
+.sign-wrapper{
+    background-image: url('../assets/bg1.avif');
+    background-repeat: none;
+    background-size: cover;
+    height: 100vh;
+    text-align: center;
+}
+
+
+.signup-form-wrapper h4{
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.6rem;
+    margin-bottom: 1.3rem;
+}
+.signup-form-wrapper{
+    width: 30rem;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: white;
+    padding: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.signup-form-wrapper input{
+    width: 100%;
+    padding: 0.8rem 0;
+    margin-bottom: 1.5rem;
+}
+
+
+.email-input, .password-input{
+    position: relative;
+}
+
+.email-icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    color: rgb(20, 20, 20);
+    padding: 4px;
+    position: absolute;
+    box-sizing:border-box;
+    top:35%;
+    left:380px;
+    transform: translateY(-50%);
+  }
+
+.login-btn button{
+    padding: 0.6rem 2.5rem;
+    background-color: rgb(2, 2, 246);
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+.forgot-password{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.2rem;
+}
+
+.forgot-password a{
+    text-decoration: none;
+    color: rgb(2, 2, 246);
+}
+
+.no-account a{
+    font-size: 1.1rem;
+    color: rgb(220, 5, 5);
+    text-decoration: none;
+}
+
+
+.no-account{
+    margin-top: 2.5rem;
+}
+

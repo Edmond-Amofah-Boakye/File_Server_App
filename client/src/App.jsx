@@ -1,10 +1,13 @@
 import './App.css'
+import PageNavbar from './components/PageNavbar'
+import Router from './Router'
 
 function App() {
 
   return (
     <>
-    <h1>Welcome to The File server App</h1>
+        {/* <PageNavbar /> */}
+        <Router />
     </>
   )
 }
