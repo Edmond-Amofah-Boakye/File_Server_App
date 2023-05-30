@@ -70,22 +70,17 @@ select{
     position: relative;
 }
 
-.search-icon{
+.search .search-icon{
     position: absolute;
-    top: 35%;
-    left: 97%;
+    top: 55%;
+    left: 95%;
     font-size: 1.5rem;
 }
 
 .search input{
     width: 30%;
     border: none;
-    padding: 0.9rem 0;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    padding: 0.5rem 0;
 }
 
 .search input:focus{
@@ -103,3 +98,38 @@ select{
     color: rgb(255, 0, 0);
     font-size: 1.2rem;
   }
+
+
+  @media (max-width: 640px) {
+    .feeds-head h1{
+        padding-top: 7rem;
+        font-size: 3rem;
+        color: rgb(96, 240, 13);
+    }
+    
+    .feeds-head p{
+        font-size: 1.5rem;
+    }
+
+    .search .search-icon{
+        top: 55%;
+        left: 90%;
+    }
+    
+    .search input{
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 530px) {
+    .feeds-head h1{
+        padding: 7rem 1rem 0 1rem;
+        font-size: 2.5rem;
+        color: rgb(96, 240, 13);
+    }
+    
+    .feeds-head p{
+        font-size: 1rem;
+    }
+}

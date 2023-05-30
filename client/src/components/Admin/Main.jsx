@@ -22,7 +22,7 @@ const Main = ({ menuInflate }) => {
         <img src={image1} alt="profile-picture" />
     </div>
 
-    {/* <MainDetails /> */}
+    <MainDetails />
     <Settings />
    
 </div>

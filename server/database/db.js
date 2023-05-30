@@ -1,12 +1,13 @@
 import mongoose from "mongoose";
 
 const connection = () =>{
-    try {
-        mongoose.connect(process.env.MONGO_URL);
-        console.log("Database sucessfully connected");
-    } catch (error) {
-        console.log(`could not connect, ${error}`);
-    }
+   mongoose.connect(process.env.MONGO_URL)
+    .then((data)=>{
+        console.log(`database sucessfully connected on ${data.connection.host}`);
+    })
+    .catch((err)=>{
+        console.log(`error occured ${err}`);
+    })
 }
 
 

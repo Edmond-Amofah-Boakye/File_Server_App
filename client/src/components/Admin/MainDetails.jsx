@@ -1,6 +1,5 @@
 import { AiFillHome} from 'react-icons/ai'
 import { SiFiles } from 'react-icons/si'
-import { BiCategoryAlt } from 'react-icons/bi'
 import { HiUsers } from 'react-icons/hi'
 const MainDetails = () => {
   return (
@@ -15,11 +14,6 @@ const MainDetails = () => {
                     <SiFiles className="files" />
                     <span className="text">Total Files</span>
                     <span className="number">120</span>
-                </div>
-                <div className="box box2">
-                    <BiCategoryAlt className="category" />
-                    <span className="text">Number of Categories</span>
-                    <span className="number">10</span>
                 </div>
                 <div className="box box3">
                   <HiUsers className="users" />

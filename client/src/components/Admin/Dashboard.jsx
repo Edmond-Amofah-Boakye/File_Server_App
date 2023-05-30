@@ -6,8 +6,7 @@ import '../../styles/Admin/Sidebar.css'
 
 const Dashboard = () => {
     const [menu, setMenu] = useState(false)
-    console.log(menu);
-
+    
     function menuInflate (){
         return setMenu(!menu)
     }

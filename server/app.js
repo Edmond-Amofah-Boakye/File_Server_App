@@ -1,5 +1,9 @@
+
+import user from './routes/UserRoute.js'
+import file from './routes/FileRoute.js'
+import auth from './routes/AuthRoute.js'
 import AppError from "./utils/AppError.js"
-import errors from "./middleware/error.js";
+import errorMiddleware from "./middleware/error.js";
 import connection from "./database/db.js";
 import express from "express";
 import cors from "cors";
@@ -8,15 +12,15 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 dotenv.config({path: './config/.env'})
 
-
 const app = express()
 
-//handling uncaught
 
+//handling uncaught
 process.on("uncaughtException", ()=>{
     console.log("sorry, something unusual happened, server shutting down!!!");
     process.exit(1)
 })
+
 
 //usimg helmet middleware
 app.use(helmet())
@@ -29,9 +33,16 @@ if(process.env.NODE_ENV === "development"){
     app.use(morgan("dev"))
 }
 
-app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.json({limit: "10kb"}))
+app.use(express.urlencoded({extended: true}))
 app.use(express.static("./uploads"))
+
+
+//route middleware
+
+app.use('/api/v1/user', user)
+app.use('/api/v1/auth', auth)
+app.use('/api/v1/file', file)
 
 
 
@@ -44,14 +55,14 @@ app.all("*", (req, res, next)=>{
 
 
 //error middleware
-app.use(errors)
+app.use(errorMiddleware)
+
+
 //connecting database
 connection()
 
 //Listening to server
-
-
-const server = app.listen(process.env.PORT || PORT, (error)=>{
+const server = app.listen(process.env.PORT, (error)=>{
     if(error){
         console.log(error.message);
     }

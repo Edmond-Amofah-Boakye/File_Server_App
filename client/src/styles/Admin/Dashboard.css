@@ -222,14 +222,14 @@ body.dark .nav-links li a:hover .link-name{
     background-color: var(--panel-color);
     border-radius: 50%;
     transition: var(--tran-03);
-    -webkit-transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
     -webkit-transition: var(--tran-03);
     -moz-transition: var(--tran-03);
     -ms-transition: var(--tran-03);
     -o-transition: var(--tran-03);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
 }
 body.dark .switch:before{
     left: 20px;
@@ -262,8 +262,8 @@ nav.close ~ .dashboard{
     align-items: center;
     padding: 10px 14px;
     background-color: var(--panel-color);
-    transition: var(--tran-05);
     z-index: 10;
+    transition: var(--tran-05);
     -webkit-transition: var(--tran-05);
     -moz-transition: var(--tran-05);
     -ms-transition: var(--tran-05);
@@ -366,11 +366,11 @@ nav.close ~ .dashboard .top{
     flex-direction: column;
     align-items: center;
     border-radius: 12px;
-    width: calc(100% / 3 - 15px);
+    width: calc(100% / 2 - 15px);
     padding: 30px 20px;
-    background: #43cea2;  
-    background: -webkit-linear-gradient(to right, #185a9d, #43cea2);  
-    background: linear-gradient(to right, #185a9d, #43cea2); 
+    background: #D38312;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #A83279, #D38312);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #A83279, #D38312);
     transition: var(--tran-05);
     -webkit-border-radius: 12px;
     -moz-border-radius: 12px;

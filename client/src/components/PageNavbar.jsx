@@ -1,7 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function PageNavbar() {
   return (
@@ -13,19 +12,13 @@ function PageNavbar() {
           <Nav className="m-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
-            <NavDropdown title="Categories" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Videos</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Audio</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Images</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Files</NavDropdown.Item>
-            </NavDropdown>
             <Nav.Link href="/feeds">Feeds</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link href="/signin" className='signin-btn'>
                 Sign in
             </Nav.Link>
-            <Nav.Link eventKey={2} href="signup">
+            <Nav.Link eventKey={2} href="/signup" className='sign'>
                 <button className = 'signup-btn'>Sign up</button>
             </Nav.Link>
           </Nav>

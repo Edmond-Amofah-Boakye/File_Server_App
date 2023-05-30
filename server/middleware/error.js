@@ -27,7 +27,7 @@ const errors = (error, req, res, next) =>{
 
     //wrong jwt erro
     if(error.name === "TokenExpiredError"){
-        const message = `Your URL is expired, please try again later`
+        const message = `Your Token is expired, please try again later`
         error = new AppError(message, 400)
     }
 
