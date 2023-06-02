@@ -34,11 +34,11 @@ const userModel = new mongoose.Schema({
     default: "default.avif"
   },
 
-  role: {
+  role:{
     type: String,
     enum: ["user", "admin"],
-    default: "user",
-  },
+    default: "user"
+},
 
   confirmed: {
     type: Boolean,
@@ -50,7 +50,7 @@ const userModel = new mongoose.Schema({
     default: true,
     select: false,
   },
-});
+}, {timestamps: true});
 
 //Hsahing password
 userModel.pre("save", async function (next) {

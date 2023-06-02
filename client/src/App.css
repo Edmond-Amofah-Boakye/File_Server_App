@@ -50,7 +50,7 @@ button{
 
 /* Navbar CSS */
 .signup-btn{
-  background-color: #4306fa !important;
+  background-color: rgb(33, 10, 243) !important;
   padding: 0.3rem 1.2rem;
   border-radius: 5px;
   -webkit-border-radius: 5px;
@@ -81,8 +81,6 @@ button{
   margin: 0 1rem !important;
 
 }
-
-
 
 .nav-style{
   position: relative !important;

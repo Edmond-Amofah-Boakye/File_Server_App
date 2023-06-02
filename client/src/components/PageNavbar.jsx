@@ -13,6 +13,7 @@ function PageNavbar() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/feeds">Feeds</Nav.Link>
+            <Nav.Link href="/contact">Contact</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link href="/signin" className='signin-btn'>

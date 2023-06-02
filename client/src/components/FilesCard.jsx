@@ -5,11 +5,13 @@ import Card from "react-bootstrap/Card";
 import { useState } from "react";
 import { GoKebabVertical } from "react-icons/go";
 import { FiDownload } from "react-icons/fi";
-import { AiFillEye } from "react-icons/ai";
+import { FaRegFilePdf } from "react-icons/fa";
+import { AiFillEye, AiFillFileWord, AiOutlineFilePdf } from "react-icons/ai";
 import { IoMdShareAlt } from "react-icons/io";
+import { MdAudiotrack } from "react-icons/md";
+import { FcVlc } from "react-icons/fc";
 import img1 from "../assets/img-3.jpg";
-import img2 from "../assets/img-1.jpg";
-import img3 from "../assets/img-2.jpg";
+
 import { Link } from "react-router-dom";
 
 function MyVerticallyCenteredModal(props) {
@@ -30,7 +32,7 @@ function MyVerticallyCenteredModal(props) {
             <IoMdShareAlt className="ic" /> <Link to='/files/send/email'>Share</Link>
           </li>
           <li>
-            <FiDownload className="ic" />{" "}
+            <FiDownload className="ic" />
             <a href={img1} download>
               Download
             </a>
@@ -45,60 +47,99 @@ const FilesCard = () => {
   const [modalShow, setModalShow] = useState(false);
   return (
     <Row>
-      <Col md={4} className="file-card">
-        <Card>
-          <Card.Img variant="top" src={img1} />
+      <Col md={3} className="file-card">
+      <Card className="shadow">
+          <Card.Header>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, saepe!
+          </Card.Header>
           <Card.Body>
-            <Card.Text className="icons">
-              The image name
-              <GoKebabVertical
-               className="dot-lines"
-                variant="primary"
-                onClick={() => setModalShow(true)}
-              />
-              <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
+            <Card.Text className="all-files-icons">
+              <FcVlc className="file-audio-icon video" />
             </Card.Text>
+            <Card.Footer className="icons">
+                Video
+                <GoKebabVertical
+                className="dot-lines"
+                  variant="primary"
+                  onClick={() => setModalShow(true)}
+                />
+                <MyVerticallyCenteredModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+            </Card.Footer>
           </Card.Body>
         </Card>
       </Col>
-      <Col md={4} className="file-card">
-        <Card>
-          <Card.Img variant="top" src={img2} />
+      <Col md={3} className="file-card">
+      <Card className="shadow">
+          <Card.Header>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, saepe!
+          </Card.Header>
           <Card.Body>
-            <Card.Text className="icons">
-              The image name
-              <GoKebabVertical
-               className="dot-lines"
-                variant="primary"
-                onClick={() => setModalShow(true)}
-              />
-              <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
+            <Card.Text className="all-files-icons">
+              <AiOutlineFilePdf className="file-audio-icon pdf"/>
             </Card.Text>
+            <Card.Footer className="icons">
+                PDF
+                <GoKebabVertical
+                className="dot-lines"
+                  variant="primary"
+                  onClick={() => setModalShow(true)}
+                />
+                <MyVerticallyCenteredModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+            </Card.Footer>
           </Card.Body>
         </Card>
       </Col>
-      <Col md={4} className="file-card">
-        <Card>
-          <Card.Img variant="top" src={img3} />
+      <Col md={3} className="file-card">
+      <Card className="shadow">
+          <Card.Header>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, saepe!
+          </Card.Header>
           <Card.Body>
-            <Card.Text className="icons">
-              The image name
-              <GoKebabVertical
-               className="dot-lines"
-                variant="primary"
-                onClick={() => setModalShow(true)}
-              />
-              <MyVerticallyCenteredModal
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-              />
+            <Card.Text className="all-files-icons">
+              <MdAudiotrack className="file-audio-icon audio" />
             </Card.Text>
+            <Card.Footer className="icons">
+                Audio
+                <GoKebabVertical
+                className="dot-lines"
+                  variant="primary"
+                  onClick={() => setModalShow(true)}
+                />
+                <MyVerticallyCenteredModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+            </Card.Footer>
+          </Card.Body>
+        </Card>
+      </Col>
+      <Col md={3} className="file-card">
+      <Card className="shadow">
+          <Card.Header>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, saepe!
+          </Card.Header>
+          <Card.Body>
+            <Card.Text className="all-files-icons">
+              <AiFillFileWord className="file-audio-icon word"/>
+            </Card.Text>
+            <Card.Footer className="icons">
+                Word Document
+                <GoKebabVertical
+                className="dot-lines"
+                  variant="primary"
+                  onClick={() => setModalShow(true)}
+                />
+                <MyVerticallyCenteredModal
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+            </Card.Footer>
           </Card.Body>
         </Card>
       </Col>

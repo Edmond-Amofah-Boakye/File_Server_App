@@ -20,6 +20,11 @@ const MainDetails = () => {
                     <span className="text">Number of Users</span>
                     <span className="number">5</span>
                 </div>
+                <div className="box box1">
+                    <SiFiles className="files" />
+                    <span className="text">Total Files</span>
+                    <span className="number">120</span>
+                </div>
             </div>
         </div>
     </div>

@@ -5,6 +5,11 @@
    -moz-border-radius: 10px;
    -ms-border-radius: 10px;
    -o-border-radius: 10px;
+   transition: all 0.5s ease-out;
+   -webkit-transition: all 0.5s ease-out;
+   -moz-transition: all 0.5s ease-out;
+   -ms-transition: all 0.5s ease-out;
+   -o-transition: all 0.5s ease-out;
 }
 
 .file-card:hover{
@@ -20,10 +25,7 @@
     -o-transform: scale(1.03);
 }
 
-.file-card img{
-    height: 250px;
-    object-fit: cover;
-}
+
 
 .icons{
     display: flex;
@@ -47,4 +49,37 @@
 .dot-lines{
     cursor: pointer;
     font-size: 1.3rem;
+}
+
+.all-files-icons{
+    text-align: center;
+}
+.file-audio-icon{
+    /* padding: 1rem; */
+    font-size: 1.6rem;
+    width: 80px;
+    height: 90px;
+    cursor: pointer;
+    /* border: 2px solid rgb(18, 24, 203); */
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    -ms-border-radius: 50px;
+    -o-border-radius: 50px;
+}
+
+.pdf{
+    color: red;
+}
+
+.audio{
+    color:rgb(5, 5, 127)
+}
+
+.word{
+    color: blue;
+}
+
+video{
+    color: #fc7e01;
 }

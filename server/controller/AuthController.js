@@ -194,6 +194,29 @@ export async function editMe(req, res, next){
   }
 }
 
+//change logged in user password
+
+export async function changePassword(req, res, next){
+  try {
+    const userExists = await userModel.findById(req.user.id)
+    if(!userExists){
+      return next(new AppError("user does not exists", 404))
+    }
+  
+    userExists.password = req.body.password;
+    await userExists.save()
+  
+    res.status(200).json({
+      message: " password sucessfully updated",
+      userExists
+    })
+    
+  } catch (error) {
+    next(error)
+  }
+}
+
+
 //delete me
 export async function deleteMe(req, res, next){
   await userModel.findByIdAndUpdate(req.user.id, {active: false})

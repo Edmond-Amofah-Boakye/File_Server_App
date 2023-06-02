@@ -5,7 +5,7 @@
 
 .signup-form{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    width: 30rem;
+    width: 40rem;
     background-color: white;
     padding: 2rem;
     position: absolute;
@@ -86,12 +86,12 @@
 
 @media (max-width: 1000px) {
     .signup-form, .send-wrapper{
-        width: 25rem;
+        width: 28rem;
     }
 }
 
 @media (max-width: 450px) {
     .signup-form, .send-wrapper{
-        width: 18rem;
+        width: 20rem;
     }
 }

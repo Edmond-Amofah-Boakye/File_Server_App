@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url'
 import FileModel from '../model/FileModel.js'
 import AppError from '../utils/AppError.js';
 import sendEmail from '../utils/SendEmail.js';
+import APIFeatures from '../utils/APIFeatures.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -46,16 +47,19 @@ export async function createFile(req, res, next) {
     }
   }
   
+ 
 
   //get all files
 
 export async function getFiles(req, res, next){
     try {
-      const files = await FileModel.find({})
-      if(!files.length === 0){
-        return next(new AppError("no files found", 404))
-      }
-  
+      const features = new APIFeatures(FileModel.find(), req.query)
+        .filter()
+        .sort()
+        .pagination()
+
+      const files = await features.query;
+
       return res.status(200).json({
         message: "success",
         files

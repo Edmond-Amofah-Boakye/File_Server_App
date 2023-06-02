@@ -10,7 +10,18 @@ import SendFile from './components/SendFile'
 import Dashboard from './components/Admin/Dashboard'
 import About from './components/About'
 import Contact from './components/Contact'
+import Home from './components/Home'
+import AddFile from './components/Admin/AddFile'
+import Settings from './components/Admin/Settings'
+import AllFiles from './components/Admin/AllFiles'
+import Users from './components/Admin/Users'
+import MainDetails from './components/Admin/MainDetails'
+import AdminPasswordReset from './components/Admin/AdminPasswordReset'
 const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />
+  },
   {
     path: "/about",
     element: <About />
@@ -50,7 +61,33 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin/dashboard",
-    element:  <Dashboard/>
+    element:  <Dashboard/>,
+      children:[
+        {
+          path: "settings",
+          element:  <Settings />
+        },
+        {
+          path: "users",
+          element:  <Users />
+        },
+        {
+          path: "password/change",
+          element:  <AdminPasswordReset />
+        },
+        {
+          path: "files",
+          element:  <AllFiles />
+        },
+        {
+          path: "",
+          element:  <MainDetails />
+        }
+      ]
+  },
+  {
+    path: "/files/add",
+    element:  <AddFile />
   },
   {
     path: "*",

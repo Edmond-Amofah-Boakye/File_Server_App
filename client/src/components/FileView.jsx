@@ -4,6 +4,7 @@ import { AiFillEye } from "react-icons/ai";
 import { IoMdShareAlt } from "react-icons/io";
 import { Link } from "react-router-dom";
 import "../styles/FileView.css";
+import Footer from '../components/Footer'
 import testImage from "../assets/bg2.avif";
 
 const FileView = () => {
@@ -46,29 +47,19 @@ const FileView = () => {
                 <p>
                   Lorem ipsum dolor sit amet consectetur, adipisicing elit.
                   Illum veniam et enim eaque, repudiandae dolores? Aspernatur
-                  porro modi minus voluptates error illum esse eaque! Debitis
-                  aspernatur nulla quibusdam expedita illum. Magnam praesentium
-                  ipsa at iusto temporibus et quidem deserunt odio, repudiandae
-                  molestiae facilis nemo qui blanditiis eos magni iste est ea! A
-                  ut mollitia qui doloremque soluta, earum iste quos! Excepturi
                   non temporibus et architecto sequi quis alias. Laudantium odio
                   vero minus nemo! Repellendus consequuntur aspernatur laborum
                   ullam eum sit minus ratione fugiat molestias corrupti! Culpa
                   eum maiores cumque consectetur! Sit quam quos quibusdam <br /> <br />
                   reprehenderit deserunt quas? Aliquid id obcaecati ducimus
                   nihil, facilis veritatis distinctio nulla et commodi amet enim
-                  consequatur dignissimos iste necessitatibus eius culpa illum
-                  sed molestias iusto cumque provident quaerat modi eum alias
-                  tempora error. Voluptatibus, sed? Similique id illum corrupti
-                  eveniet minima eum esse adipisci fugiat libero quae quia,
-                  quasi ducimus est in doloribus ratione non officiis ut quo
-                  sequi magni cum vero. Fugit, adipisci provident.
                 </p>
               </div>
             </Col>
           </Row>
         </Container>
       </div>
+      <Footer />
     </>
   );
 };

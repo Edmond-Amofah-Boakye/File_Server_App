@@ -95,7 +95,7 @@
 
 @media (max-width: 1000px) {
     .signup-form-wrapper{
-        width: 25rem;
+        width: 30rem;
     }
     .email-icon{
         left: 300px;
@@ -104,7 +104,7 @@
 
 @media (max-width: 450px) {
     .signup-form-wrapper{
-        width: 18rem;
+        width: 20rem;
     }
     .email-icon{
         left: 190px;

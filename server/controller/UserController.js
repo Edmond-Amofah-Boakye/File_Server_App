@@ -2,14 +2,16 @@ import sendEmail from "../utils/SendEmail.js";
 import userModel from "../model/UserModel.js";
 import tokenSchema from '../model/TokenModel.js'
 import AppError from '../utils/AppError.js'
+import APIFeatures from '../utils/APIFeatures.js'
 
 //creating user
 export async function createUser(req, res, next) {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
   const user = new userModel({
     name,
     email,
     password,
+    role
   });
 
   try {
@@ -46,11 +48,15 @@ export async function createUser(req, res, next) {
 
 export async function getAllUsers(req, res, next){
   try {
-    const users = await userModel.find({})
-    if(users.length === 0){
-      return next(new AppError("no users found", 404))
-    }
+    
 
+    const features = new APIFeatures(userModel.find(), req.query)
+      .filter()
+      .sort()
+      .pagination()
+    
+      const users = await features.query;
+    
     return res.status(200).json({
       message: "success",
       users
@@ -60,15 +66,6 @@ export async function getAllUsers(req, res, next){
   }
 }
 
-
-
-
-
-//edit user
-
-export async function editUser(req, res, next){
-
-}
 
 
 //get single user
