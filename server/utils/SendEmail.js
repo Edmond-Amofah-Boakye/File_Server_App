@@ -1,5 +1,5 @@
 import sgMail from '@sendgrid/mail'
-const apiKey = "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"
+
 sgMail.setApiKey(apiKey)
 
 
