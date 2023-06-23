@@ -5,18 +5,20 @@ import ResetPassword from './components/ResetPassword'
 import ErrorPage from './components/ErrorPage'
 import {createBrowserRouter, RouterProvider} from "react-router-dom"
 import Feeds from './components/Feeds'
-import FileView from './components/FileView'
 import SendFile from './components/SendFile'
 import Dashboard from './components/Admin/Dashboard'
 import About from './components/About'
-import Contact from './components/Contact'
 import Home from './components/Home'
 import AddFile from './components/Admin/AddFile'
+import EditFile from './components/Admin/EditFile'
 import Settings from './components/Admin/Settings'
 import AllFiles from './components/Admin/AllFiles'
 import Users from './components/Admin/Users'
 import MainDetails from './components/Admin/MainDetails'
 import AdminPasswordReset from './components/Admin/AdminPasswordReset'
+import VerifyUser from './components/Verify/VerifyUser'
+import Auth from './components/Helpers/Auth'
+import AdminAuth from './components/Helpers/AdminAuth'
 const router = createBrowserRouter([
   {
     path: "/",
@@ -25,11 +27,6 @@ const router = createBrowserRouter([
   {
     path: "/about",
     element: <About />
-  },
-
-  {
-    path: "/contact",
-    element: <Contact />
   },
   {
     path: "/signin",
@@ -40,28 +37,28 @@ const router = createBrowserRouter([
     element:  <ForgotPassword />
   },
   {
+    path: "/verify/:token",
+    element:  <VerifyUser />
+  },
+  {
     path: "/signup",
     element:  <Signup />
   },
   {
     path: "/feeds",
-    element:  <Feeds />
+    element:  <Auth><Feeds /></Auth>
   },
   {
-    path: "/files/view",
-    element:  <FileView />
+    path: "/file/send/email/:id",
+    element:  <Auth><SendFile /></Auth>
   },
   {
-    path: "/files/send/email",
-    element:  <SendFile />
-  },
-  {
-    path: "/password/reset",
+    path: "/password/reset/:token",
     element:  <ResetPassword />
   },
   {
     path: "/admin/dashboard",
-    element:  <Dashboard/>,
+    element:  <AdminAuth><Dashboard/></AdminAuth>,
       children:[
         {
           path: "settings",
@@ -87,7 +84,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/files/add",
-    element:  <AddFile />
+    element:  <AdminAuth><AddFile /></AdminAuth>
+  },
+  {
+    path: "/file/edit/:id",
+    element:  <AdminAuth><EditFile /></AdminAuth>
   },
   {
     path: "*",

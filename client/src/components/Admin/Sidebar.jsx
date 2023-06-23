@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import logOutUser from '../Helpers/Logout'
 import { AiFillSetting, AiOutlineLogout } from "react-icons/ai";
 import { FaChartBar } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
@@ -7,15 +8,20 @@ import { HiUsers } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import image1 from "../../assets/img-2.jpg";
 import "../../styles/Admin/Sidebar.css";
+import { useContext } from 'react';
+import { Context } from '../../store/AppContext';
+
 
 const Sidebar = ({ menu }) => {
+  const {getMe} = useContext(Context)
+
   return (
     <nav className={menu ? "close" : ""}>
       <div className="logo-name">
         <div className="logo-image">
           <img src={image1} alt="profile-image" />
         </div>
-        <span className="logo_name">Admin</span>
+        <span className="logo_name">{getMe.name}</span>
       </div>
 
       <div className="menu-items">
@@ -39,19 +45,13 @@ const Sidebar = ({ menu }) => {
             </Link>
           </li>
           <li>
-            <Link to='/admin/dashboard/charts'>
-              <FaChartBar className="icon" />
-              <span className="link-name">Chart</span>
-            </Link>
-          </li>
-          <li>
             <Link to='/admin/dashboard/settings'>
               <AiFillSetting className="icon" />
               <span className="link-name">Settings</span>
             </Link>
           </li>
         </ul>
-        <ul className="logout-mode">
+        <ul className="logout-mode" onClick={logOutUser}>
           <li>
             <Link>
               <AiOutlineLogout className="icon" />

@@ -12,9 +12,7 @@ class APIFeatures{
       delete(qryObject[field])
     })
       this.query.find(qryObject)
-
       return this
-
     }
 
     //sorting
@@ -28,7 +26,6 @@ class APIFeatures{
     }
 
     
-
     //pagination
     pagination(){
       const page = this.queryString.page * 1 || 1;

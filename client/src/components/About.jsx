@@ -3,10 +3,12 @@ import Footer from "../components/Footer";
 import aboutImage from "../assets/img-4.jpg";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import PageNavbar from "./PageNavbar";
 
 const About = () => {
   return (
     <>
+    <PageNavbar />
       <div className="about-us-wrapper">
         <Container>
           <Row className="info">

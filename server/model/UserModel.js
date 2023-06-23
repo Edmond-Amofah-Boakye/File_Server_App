@@ -60,7 +60,7 @@ userModel.pre("save", async function (next) {
   next();
 });
 
-//finding all users which are active and confirmed
+//finding all users which are active 
 userModel.pre(/^find/, function (next) {
   this.find({ active: { $ne: false }});
   next();

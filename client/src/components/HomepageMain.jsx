@@ -1,10 +1,9 @@
 import "../styles/HomepageMain.css";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import videoIcon from '../assets/video.jpg'
-import pfdIcon from '../assets/PDF.png'
-import imageIcon from '../assets/image-logo.png'
-import audioIcon from '../assets/audio.jpg'
+import { AiOutlineFilePdf, AiOutlineFileImage } from "react-icons/ai";
+import { MdAudiotrack } from "react-icons/md";
+import { FcVlc } from "react-icons/fc";
 
 
 const HomepageMain = () => {
@@ -38,7 +37,7 @@ const HomepageMain = () => {
             <Col md={3}>
               <div className="videos-icon-info">
                 <div className="video-icon">
-                  <img src={videoIcon} alt="" />
+                  <MdAudiotrack style={{color: "white"}} className="file-audio-icon ic audio"/>
                 </div>
                   <h4>Videos</h4>
                   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, ipsam?</p>
@@ -47,7 +46,7 @@ const HomepageMain = () => {
             <Col md={3}>
               <div className="videos-icon-info">
                 <div className="video-icon">
-                  <img src={pfdIcon} alt="" />
+                 <AiOutlineFilePdf className="file-audio-icon ic pdf"/>
                 </div>
                   <h4>PDF's</h4>
                   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, ipsam?</p>
@@ -56,7 +55,7 @@ const HomepageMain = () => {
             <Col md={3}>
               <div className="videos-icon-info">
                 <div className="video-icon">
-                  <img src={imageIcon} alt="" />
+                  <AiOutlineFileImage style={{color: "white"}} className="file-audio-icon ic image"/>
                 </div>
                   <h4>Images</h4>
                   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, ipsam?</p>
@@ -65,7 +64,7 @@ const HomepageMain = () => {
             <Col md={3}>
               <div className="videos-icon-info audio-info">
                 <div className="video-icon">
-                  <img src={audioIcon} alt="" />
+                  <FcVlc  className="file-audio-icon video"/>
                 </div>
                   <h4>Audio</h4>
                   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, ipsam?</p>

@@ -1,4 +1,3 @@
-import AppError from '../utils/AppError.js'
 import multer from 'multer';
 
 const multerStorage = multer.diskStorage({
@@ -12,16 +11,6 @@ const multerStorage = multer.diskStorage({
         cb(null, `user-${req.user._id}-${Date.now()}.${ext}`)
     }
 })
-
-
-// const fileFilter = (req, file, cb) =>{
-//     if(file.filename.endsWith(".csv")){
-//         cb(new AppError("file type not required", 400), false)
-//     }else{
-//         cb(null, true)
-//     }
-// }
-
 
 const upload = multer({
     storage: multerStorage,

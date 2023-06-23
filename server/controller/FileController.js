@@ -135,8 +135,7 @@ export async function updateFile(req, res, next){
 
         await FileModel.findByIdAndDelete(id)
         res.status(204).json({
-            status: "success",
-            data: null
+            message: "successfully deleted",
           })
     } catch (error) {
         next(error)
@@ -144,7 +143,7 @@ export async function updateFile(req, res, next){
   }
 
 //update downloads
-  export async function updateFileDownloads(req, res, next){
+  export async function downloadFile(req, res, next){
     const { id } = req.params;
     try {
         const fileExists = await FileModel.findById(id)
@@ -152,21 +151,22 @@ export async function updateFile(req, res, next){
             return next(new AppError("no file found", 404))
         }
     
-        fileExists.downloads+=1;
-        await fileExists.save()
-        
-        return res.status(201).json({
-            status: "successfully donloaded file",
-            fileExists
-          })
+        let fileType = path.join(__dirname, `../uploads/${fileExists.file}`)
 
+        res.download(fileType, fileType, (error)=>{
+          if(error){
+              return next(new AppError("problem downloading file", 404))
+          }
+          fileExists.downloads+=1;
+          fileExists.save()
+      })
+        
     } catch (error) {
         next(error)
     }
   }
 
   //send file to email
-
   export async function sendFiletoEmail(req, res, next){
     const { email, filemessage } = req.body
     try {
@@ -195,4 +195,62 @@ export async function updateFile(req, res, next){
     } catch (error) {
       next(error)
     }
+  }
+
+
+  //search file
+
+  export async function searchFile (req, res, next){
+    try {
+      const findFile = await FileModel.find({
+          '$or':[
+            {title: {$regex: req.params.search}},
+            {description: {$regex: req.params.search}}
+          ]
+      })
+    
+    if(findFile.length === 0){
+      return next(new AppError("no file found", 404))
+    }
+
+    return res.status(200).json({
+      data: findFile
+    })
+     
+    } catch (error) {
+      next(error)
+    }
+  }
+
+
+  //preview file
+
+  export async function previewFile(req, res, next){
+    const allowedFiles = ['pfd', 'jpg', 'jpeg', 'avif', 'png', 'mp3', 'mp4']
+
+    let attach = '../uploads/user-647ccd617d640e6cf7d6cb69-1686788505347.pdf'
+
+    
+
+    var filePath = "/uploads/user-647ccd617d640e6cf7d6cb69-1686788505347.pdf";
+
+    fs.readFile(__dirname + filePath , function (err,data){
+        res.contentType("application/pdf");
+        res.send(data);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
   }

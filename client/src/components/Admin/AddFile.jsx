@@ -1,60 +1,101 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { Context } from "../../store/AppContext";
 import { Container } from "react-bootstrap";
 import { AiOutlineArrowLeft, AiOutlineFileImage } from "react-icons/ai";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import server from '../Helpers/Server'
+import axios from 'axios'
+import swal from "sweetalert2";
 import "../../styles/Admin/AddFiles.css";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-const modules = {
-  toolbar: [
-    [{ font: [] }],
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-    ["bold", "italic", "underline", "strike"],
-    [{ color: [] }, { background: [] }],
-    [{ script: "sub" }, { script: "super" }],
-    ["blockquote", "code-block"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ indent: "-1" }, { indent: "+1" }, { align: [] }],
-    ["link", "image", "video"],
-    ["clean"],
-  ],
-};
+
+
+
+
+
 const AddFile = () => {
-  const [value, setValue] = useState("");
+  const { getFiles, setGetFiles } = useContext(Context)
+
+
+  const [selectFile, setSelectFile] = useState("");
+  const [title, setTitle] = useState("");
+  const [file, setFile] = useState("");
+  const [description, setDescription] = useState("");
+
+
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
+
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("description", description)
+    formData.append("type", selectFile)
+    formData.append("file", file)
+
+    try {
+      axios.post(`${server}/file/create`, formData, {withCredentials: true}).then((res)=>{
+        swal.fire({
+          icon: "success",
+          title: `${res.data.message}`,
+        })
+        setGetFiles([...getFiles, res.data.createdFile])
+      })
+
+    } catch (error) {
+      swal.fire({
+        icon: "error",
+        title: `${error.response.data.message}`,
+    })}}
+
   return (
     <>
       <Container className="add-all-files">
-        <Link to='/admin/dashboard'><AiOutlineArrowLeft className="back-arrow"/></Link>
+        <Link to="/admin/dashboard/files">
+          <AiOutlineArrowLeft className="back-arrow" />
+        </Link>
         <div className="add-file-header">
-            <h1>Add Files</h1>
+          <h1>Add Files</h1>
         </div>
-        <form action="">
-            <div className="file-title">
-                <input type="text" placeholder="File title"/>
-            </div>
-            <div className="file-title">
-                <select name="" id="">
-                    <option value="">select</option>
-                    <option value="">video</option>
-                    <option value="">audio</option>
-                    <option value="">pdf</option>
-                    <option value="">images</option>
-                </select>
-            </div>
-            <div className="file-title">
-              <label className="mb-4 text-primary" htmlFor="choose-image" >Select File <AiOutlineFileImage />
-              </label>
-                <input type="file" id="choose-image" style={{display: 'none'}} />
-            </div>
-            
-        <ReactQuill
-            modules={modules}
-            theme="snow"
+        <form onSubmit={handleSubmit}>
+          <div className="file-title">
+            <input
+              type="text"
+              value={title}
+              placeholder="File title"
+              required
+              onChange={(e) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="file-title">
+            <select
+              value={selectFile}
+              required
+              onChange={(e) => setSelectFile(e.target.value)}
+            >
+              <option value="video">video</option>
+              <option value="audio">audio</option>
+              <option value="pdf">pdf</option>
+              <option value="image">image</option>
+            </select>
+          </div>
+          <div className="file-title">
+            <label className="mb-4 text-primary" htmlFor="choose-image">
+              Select File <AiOutlineFileImage />
+            </label>
+            <input
+              type="file"
+              id="choose-image"
+              style={{ display: "none" }}
+              required
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+          </div>
+          <textarea
             placeholder="File Description"
-            value={value}
-            onChange={setValue}
-        />
-        <button>Add</button>
+            value={description}
+            required
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <button>Add</button>
         </form>
       </Container>
     </>

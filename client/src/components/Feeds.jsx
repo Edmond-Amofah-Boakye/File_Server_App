@@ -1,13 +1,25 @@
 import "../styles/Feeds.css";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { AiOutlineSearch } from 'react-icons/ai'
+import { Context } from "../store/AppContext";
 import FilesCard from "./FilesCard";
-function Feeds() {
+import PageNavbar from "./PageNavbar";
 
+function Feeds() {
+  
+  const { getFiles } = useContext(Context);
   const [search, setSearch] = useState("")
+  
+  let files;
+
+  files = getFiles.filter((el)=>{
+    return el.title.toLowerCase().includes(search.toLowerCase())
+  })
 
   return (
+    <>
+    <PageNavbar />
     <div className="feeds">
       <div className="feeds-head">
         <h1 className="l">We've got you covered</h1>
@@ -19,7 +31,7 @@ function Feeds() {
       <Container>
         <h1 className="all-files">All Files</h1>
         <Row className="feeds-row-1">
-          <Col md={4}>
+          <Col md={8}>
             <h4 className="num-files">385 Files</h4>
           </Col>
           <Col sm={4}>
@@ -28,14 +40,6 @@ function Feeds() {
                 <option value="">Sort By</option>
                 <option value="">Ascending</option>
                 <option value="">Descending</option>
-              </select>
-            </div>
-          </Col>
-          <Col sm={4}>
-            <div className="filter">
-              <select name="" id="">
-                <option value="">Filter By</option>
-                <option value="">Date</option>
               </select>
             </div>
           </Col>
@@ -48,9 +52,10 @@ function Feeds() {
           <input type="text" value={search} onChange={(e)=>setSearch(e.target.value)}/>
         </div>
         <hr />
-        <FilesCard />
+        <FilesCard files={files}/>
       </Container>
     </div>
+    </>
   );
 }
 

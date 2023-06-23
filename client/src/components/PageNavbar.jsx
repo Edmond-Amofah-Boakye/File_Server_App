@@ -3,6 +3,8 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
 function PageNavbar() {
+  const isLoggedin = localStorage.getItem("role")
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className='nav-style' >
       <Container>
@@ -13,16 +15,14 @@ function PageNavbar() {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/about">About</Nav.Link>
             <Nav.Link href="/feeds">Feeds</Nav.Link>
-            <Nav.Link href="/contact">Contact</Nav.Link>
           </Nav>
+          {!isLoggedin && 
           <Nav>
-            <Nav.Link href="/signin" className='signin-btn'>
-                Sign in
-            </Nav.Link>
-            <Nav.Link eventKey={2} href="/signup" className='sign'>
-                <button className = 'signup-btn'>Sign up</button>
-            </Nav.Link>
-          </Nav>
+          <Nav.Link eventKey={2} href="/signin" className='sign'>
+              <button className = 'signup-btn'>Sign in</button>
+          </Nav.Link>
+        </Nav>
+          }
         </Navbar.Collapse>
       </Container>
     </Navbar>

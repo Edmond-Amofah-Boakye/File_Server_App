@@ -7,17 +7,21 @@ import APIFeatures from '../utils/APIFeatures.js'
 //creating user
 export async function createUser(req, res, next) {
   const { name, email, password, role } = req.body;
-  const user = new userModel({
-    name,
-    email,
-    password,
-    role
-  });
-
+  
   try {
-    if(!user){
-        return next(new AppError("could not create user", 401))
+
+    const userExists = await userModel.findOne({email})
+
+    if(userExists){
+      return next(new AppError("user with email already exist", 400))
     }
+    if(password.length < 6){
+      return next(new AppError("password lenght should be more than 6", 400))
+    }
+    const user = new userModel({
+      name, email, password, role
+    });
+
     await user.save();
 
     const token = user.generateConfirmationToken()
@@ -36,7 +40,7 @@ export async function createUser(req, res, next) {
     new sendEmail(user.email, url, userName).verifyEmail()
        
     res.status(201).json({
-      message: "user successfully created",
+      message: "Sucess, activate your account through your email",
       user,
     });
   } catch (error) {
@@ -49,8 +53,7 @@ export async function createUser(req, res, next) {
 export async function getAllUsers(req, res, next){
   try {
     
-
-    const features = new APIFeatures(userModel.find(), req.query)
+    const features = new APIFeatures(userModel.find().select("+active"), req.query)
       .filter()
       .sort()
       .pagination()
@@ -82,28 +85,6 @@ export async function findUser (req, res, next){
       message: "success",
       user
     })
-  } catch (error) {
-    next(error)
-  }
-}
-
-//delete user 
-
-export async function deleteUser (req, res, next){
-  const { id } = req.params
-  try {
-    const deleted = await userModel.findById(id)
-    deleted.active = false;
-    await deleted.save()
-
-    if(!deleted){
-      return next(new AppError("could not delete"), 500)
-    }
-
-    return res.status(400).json({
-      message: "sucessfully deleted"
-    })
-
   } catch (error) {
     next(error)
   }

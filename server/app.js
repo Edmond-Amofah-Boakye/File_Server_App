@@ -1,4 +1,3 @@
-
 import user from './routes/UserRoute.js'
 import file from './routes/FileRoute.js'
 import auth from './routes/AuthRoute.js'
@@ -7,6 +6,7 @@ import errorMiddleware from "./middleware/error.js";
 import connection from "./database/db.js";
 import express from "express";
 import cors from "cors";
+import cookieParser from 'cookie-parser';
 import morgan from "morgan";
 import helmet from "helmet";
 import dotenv from "dotenv";
@@ -26,25 +26,26 @@ process.on("uncaughtException", ()=>{
 app.use(helmet())
 
 //using cors middleware
-app.use(cors())
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}))
 
 //using morgan middleware
 if(process.env.NODE_ENV === "development"){
     app.use(morgan("dev"))
 }
 
+app.use(cookieParser())
 app.use(express.json({limit: "10kb"}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("./uploads"))
 
 
 //route middleware
-
 app.use('/api/v1/user', user)
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/file', file)
-
-
 
 
 
@@ -52,7 +53,6 @@ app.use('/api/v1/file', file)
 app.all("*", (req, res, next)=>{
     next(new AppError(`cannot find ${req.originalUrl} on this server`, 404))
 })
-
 
 //error middleware
 app.use(errorMiddleware)

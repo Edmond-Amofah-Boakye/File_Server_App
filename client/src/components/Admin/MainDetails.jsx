@@ -1,7 +1,15 @@
 import { AiFillHome} from 'react-icons/ai'
 import { SiFiles } from 'react-icons/si'
 import { HiUsers } from 'react-icons/hi'
+import { Context } from '../../store/AppContext'
+import { useContext } from 'react'
 const MainDetails = () => {
+    
+    const { getUsers, getFiles } = useContext(Context)
+
+
+
+
   return (
     <div className="dash-content">
         <div className="overview">
@@ -13,17 +21,17 @@ const MainDetails = () => {
                 <div className="box box1">
                     <SiFiles className="files" />
                     <span className="text">Total Files</span>
-                    <span className="number">120</span>
+                    <span className="number">{getFiles.length}</span>
                 </div>
                 <div className="box box3">
                   <HiUsers className="users" />
                     <span className="text">Number of Users</span>
-                    <span className="number">5</span>
+                    <span className="number">{getUsers.length}</span>
                 </div>
                 <div className="box box1">
                     <SiFiles className="files" />
-                    <span className="text">Total Files</span>
-                    <span className="number">120</span>
+                    <span className="text">Number of File Types</span>
+                    <span className="number">4</span>
                 </div>
             </div>
         </div>

@@ -18,14 +18,19 @@ const errors = (error, req, res, next) =>{
         error = new AppError(message, 400)
     }
 
+    //Validation Error
+    if(error.name === "validationError"){
+        // const errors = Object.keys()
+        const message = Object.values(error.errors).map((val)=>val.message)
+        error = new AppError(message, 400)
+    }
     //wrong jwt error
     if(error.name === "JsonWebTokenError"){
         const message = `Your URL is invalid, please try again later`
         error = new AppError(message, 400)
     }
 
-
-    //wrong jwt erro
+    //wrong jwt error
     if(error.name === "TokenExpiredError"){
         const message = `Your Token is expired, please try again later`
         error = new AppError(message, 400)

@@ -11,13 +11,13 @@ router.route('/')
 
 
     
-//protect all routes under this
+// protect all routes under this
 router.use(auth)
 router.use(restrictAccessTo("admin"))
 
 router.route('/:id')
     .get(UserController.findUser)
-    .delete(UserController.deleteUser)
+    
 
 
 

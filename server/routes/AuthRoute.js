@@ -8,7 +8,7 @@ const router = Router()
 
 
 router.route('/login').post(AuthController.login)
-router.route('/verify/email/:token').get(AuthController.verifyEmail)
+router.route('/logout').get(AuthController.Logout)
 router.route('/verify/email/:token').get(AuthController.verifyEmail)
 router.route('/password/forgot').post(AuthController.forgotPassword)
 router.route('/password/reset/:token').post(AuthController.resetPassword)
@@ -22,5 +22,6 @@ router.route('/me').get(AuthController.findMe)
 router.route('/edit/me').patch(uploads.single("image"), AuthController.editMe)
 router.route('/me/edit/password').post(AuthController.changePassword)
 router.route('/delete/me').delete(AuthController.deleteMe)
+router.route('/:search').get(AuthController.searchUser)
 
 export default router;

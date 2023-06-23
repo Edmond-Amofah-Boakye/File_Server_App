@@ -1,5 +1,5 @@
 import sgMail from '@sendgrid/mail'
-const apiKey = ""
+const apiKey = "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"
 sgMail.setApiKey(apiKey)
 
 
@@ -24,7 +24,7 @@ class sendEmail{
         console.log('Email sent')
       })
       .catch((error) => {
-        console.error(error)
+        return console.error(error)
       })
   }
 
@@ -59,6 +59,7 @@ class sendEmail{
           <h1>You have requested for Password Reset</h1>
           <p style="font-size: 1rem;">
             Kindly click on the link below to Reset your password!!
+            Link expires in 10 minutes time.
           </p>
           <a href=${this.url}>
             <button

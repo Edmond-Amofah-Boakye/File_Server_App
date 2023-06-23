@@ -9,8 +9,10 @@ const router = Router()
 //protect all routes under this
 
 router.use(auth)
-router.route("/downloads/:id").patch(FileController.updateFileDownloads)
+router.route("/downloads/:id").get(FileController.downloadFile)
 router.route("/email/:id").post(FileController.sendFiletoEmail)
+router.route("/key/:search").get(FileController.searchFile)
+router.route("/preview").get(FileController.previewFile)
 
 //restricting to only admin
 router.use(restrictAccessTo("admin"))
