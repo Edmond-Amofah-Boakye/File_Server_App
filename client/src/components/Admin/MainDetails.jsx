@@ -3,13 +3,16 @@ import { SiFiles } from 'react-icons/si'
 import { HiUsers } from 'react-icons/hi'
 import { Context } from '../../store/AppContext'
 import { useContext } from 'react'
+import Chart from './LineChart'
+
+
+
+
+
+
+
 const MainDetails = () => {
-    
     const { getUsers, getFiles } = useContext(Context)
-
-
-
-
   return (
     <div className="dash-content">
         <div className="overview">
@@ -34,6 +37,9 @@ const MainDetails = () => {
                     <span className="number">4</span>
                 </div>
             </div>
+        </div>
+        <div className="chart" style={{padding: "4rem 0"}}>
+           <Chart />
         </div>
     </div>
   )

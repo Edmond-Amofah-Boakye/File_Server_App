@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 import logOutUser from '../Helpers/Logout'
 import { AiFillSetting, AiOutlineLogout } from "react-icons/ai";
-import { FaChartBar } from "react-icons/fa";
 import { MdDashboard } from "react-icons/md";
 import { SiFiles } from "react-icons/si";
 import { HiUsers } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import image1 from "../../assets/img-2.jpg";
+import image1 from "../../assets/default.avif";
 import "../../styles/Admin/Sidebar.css";
 import { useContext } from 'react';
 import { Context } from '../../store/AppContext';
@@ -18,9 +17,6 @@ const Sidebar = ({ menu }) => {
   return (
     <nav className={menu ? "close" : ""}>
       <div className="logo-name">
-        <div className="logo-image">
-          <img src={image1} alt="profile-image" />
-        </div>
         <span className="logo_name">{getMe.name}</span>
       </div>
 

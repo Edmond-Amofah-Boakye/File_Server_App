@@ -142,24 +142,25 @@ export async function updateFile(req, res, next){
     }
   }
 
-//update downloads
+//downloads
   export async function downloadFile(req, res, next){
-    const { id } = req.params;
+    const { filename } = req.params;
     try {
-        const fileExists = await FileModel.findById(id)
+        const fileExists = await FileModel.findOne({file:filename})
         if(!fileExists){
             return next(new AppError("no file found", 404))
         }
     
-        let fileType = path.join(__dirname, `../uploads/${fileExists.file}`)
+        const filePath = path.join(__dirname, "../uploads", filename)
+        
+        res.set("Content-Disposition", "attachment")
 
-        res.download(fileType, fileType, (error)=>{
-          if(error){
-              return next(new AppError("problem downloading file", 404))
-          }
-          fileExists.downloads+=1;
-          fileExists.save()
-      })
+        res.sendFile(filePath)
+
+        fileExists.downloads+=1;
+        fileExists.save()
+
+       
         
     } catch (error) {
         next(error)
@@ -226,31 +227,21 @@ export async function updateFile(req, res, next){
   //preview file
 
   export async function previewFile(req, res, next){
-    const allowedFiles = ['pfd', 'jpg', 'jpeg', 'avif', 'png', 'mp3', 'mp4']
-
-    let attach = '../uploads/user-647ccd617d640e6cf7d6cb69-1686788505347.pdf'
-
+    const { filename } = req.params;
+    try {
+        const fileExists = await FileModel.findOne({file:filename})
+        if(!fileExists){
+            return next(new AppError("no file found", 404))
+        }
     
+        const filePath = path.join(__dirname, "../uploads", filename)
+        
+        res.set("Content-Disposition", "inline")
 
-    var filePath = "/uploads/user-647ccd617d640e6cf7d6cb69-1686788505347.pdf";
+        res.sendFile(filePath)
+        
+    } catch (error) {
+        next(error)
+    }
 
-    fs.readFile(__dirname + filePath , function (err,data){
-        res.contentType("application/pdf");
-        res.send(data);
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
   }

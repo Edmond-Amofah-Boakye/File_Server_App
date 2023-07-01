@@ -17,6 +17,7 @@ router.use(restrictAccessTo("admin"))
 
 router.route('/:id')
     .get(UserController.findUser)
+    .delete(UserController.deleteUser)
     
 
 

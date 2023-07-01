@@ -37,7 +37,7 @@ const About = () => {
               </div>
             </Col>
           </Row>
-          <Row>
+          <Row className="sahre-dwld">
             <Col md={7}>
               <div className="share-download-msg">
                 <h2>

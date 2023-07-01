@@ -89,3 +89,21 @@ export async function findUser (req, res, next){
     next(error)
   }
 }
+
+
+export async function deleteUser(req, res, next){
+  try {
+    const userExists = await userModel.findById(req.params.id)
+    if(!userExists ){
+      return next(new AppError("no user found", 404))
+    }
+
+    await userModel.findByIdAndDelete(req.params.id)
+    res.status(204).json({
+        message: "successfully deleted",
+      })
+
+  } catch (error) {
+    
+  }
+}

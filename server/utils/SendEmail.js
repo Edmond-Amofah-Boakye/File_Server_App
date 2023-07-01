@@ -1,5 +1,7 @@
+import dotenv from 'dotenv'
+dotenv.config({path: './config/.env'})
 import sgMail from '@sendgrid/mail'
-
+const apiKey = process.env.SENDGRID_API_KEY
 sgMail.setApiKey(apiKey)
 
 
@@ -8,7 +10,7 @@ class sendEmail{
     this.to = email,
     this.name = name,
     this.url = url
-    this.from = 'edmondboakye1622@gmail.com'
+    this.from = process.env.EMAIL
   }
 
   send(subject, message, file){

@@ -1,5 +1,5 @@
 import "../../styles/Admin/Settings.css";
-import defaultImage from "../../assets/img-1.jpg";
+import defaultImage from "../../assets/default.avif";
 import server from "../Helpers/Server";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -19,7 +19,7 @@ const Settings = () => {
       .then((res) => {
         setName(res.data.user.name);
         setEmail(res.data.user.email);
-        setFile(res.data.user.file);
+        setFile(res.data.user.picture);
       })
       .catch((error) => {
         console.log(error);
@@ -85,7 +85,6 @@ const Settings = () => {
                   type="file"
                   id="choose-image"
                   style={{ display: "none" }}
-                  required
                   onChange={(e) => setFile(e.target.files[0])}
                 />
               </div>

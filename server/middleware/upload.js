@@ -15,10 +15,12 @@ const multerStorage = multer.diskStorage({
 
 
 const fileFilter = (req, file, cb) =>{
-    if(file.mimetype.startsWith("image")){
+    const allowedFiles = ["application/pdf", "image/jpg", "image/jpeg", "mage/gif", "image/png", "audio/mpeg", "video/mp4"]
+    
+    if(allowedFiles.includes(file.mimetype)){
         cb(null, true)
     }else{
-        cb(new AppError("file shhould be image", 400), false)
+        cb(new AppError("file not supported", 400), false)
     }
 }
 
@@ -26,9 +28,6 @@ const fileFilter = (req, file, cb) =>{
 const upload = multer({
     storage: multerStorage,
     fileFilter: fileFilter,
-    limits: {
-        fileSize: 1000000
-    }
 })
 
 

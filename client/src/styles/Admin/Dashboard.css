@@ -62,30 +62,12 @@ nav{
 nav.close{
     width: 73px;
 }
-nav .logo-name{
-    display: flex;
-    align-items: center;
-}
-nav .logo-image{
-    display: flex;
-    justify-content: center;
-    min-width: 45px;
-}
-nav .logo-image img{
-    width: 40px;
-    height: 40px;
-    object-fit: cover;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-}
+
 
 nav .logo-name .logo_name{
     font-size: 22px;
     font-weight: 600;
-    color: var(--text-color);
+    color: var( --primary-color);
     margin-left: 14px;
     transition: var(--tran-05);
     -webkit-transition: var(--tran-05);
@@ -93,6 +75,9 @@ nav .logo-name .logo_name{
     -ms-transition: var(--tran-05);
     -o-transition: var(--tran-05);
 }
+
+
+
 nav.close .logo_name{
     opacity: 0;
     pointer-events: none;

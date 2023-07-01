@@ -268,6 +268,8 @@ export async function searchUser(req, res, next){
  }
 }
 
+
+//Logout user
 export async function Logout (req, res, next){
   res.cookie("jwt", "logout",{
     httpOnly: true,

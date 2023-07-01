@@ -19,6 +19,20 @@ import "../../styles/Admin/Users.css";
 const AllFiles = () => {
   const { getFiles, search, setGetFiles } = useContext(Context);
 
+  //handle file preview
+  const handlePreview = (filename) => {
+    fetch(`${server}/file/preview/${filename}`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        const fileURL = URL.createObjectURL(blob);
+        window.open(fileURL);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error("Error fetching file:", error);
+      });
+  };
+
   //handle delete
   const handleDelete = (id) => {
     swal
@@ -76,71 +90,76 @@ const AllFiles = () => {
           <h4 className="file-header">All Files</h4>
           <Row className="feeds-row-1">
             <Col md={9}>
-              <h4 className="num-files">{getFiles.length} Files</h4>
-            </Col>
-            <Col sm={3}>
-              <div className="sort">
-                <select name="" id="">
-                  <option value="">Sort By</option>
-                  <option value="">Ascending</option>
-                  <option value="">Descending</option>
-                </select>
-              </div>
+              <h4 className="num-files">{getFiles.length} File(s)</h4>
             </Col>
           </Row>
-          <Table striped responsive>
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>
-                  <TfiEmail className="statistics-icon" />
-                </th>
-                <th>
-                  <FiDownload />
-                </th>
-                <th>View</th>
-                <th>Send</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {files.map((item) => {
-                return (
-                  <tr key={item._id}>
-                    <td>1</td>
-                    <td>{item.title}</td>
-                    <td>{item.description}</td>
-                    <td>{item.emails}</td>
-                    <td>{item.downloads}</td>
-                    <td>
-                      <Link to={`/files/view/${item._id}`}>
-                        <AiFillEye className="action-icon action-view" />
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/file/send/email/${item._id}`}>
-                        <AiOutlineSend className="action-icon action-send" />
-                      </Link>
-                    </td>
-                    <td>
-                      <Link to={`/file/edit/${item._id}`}>
-                        <AiFillEdit className="action-icon action-edit" />
-                      </Link>
-                    </td>
-                    <td>
-                      <AiFillDelete
-                        className="action-icon action-delete"
-                        onClick={() => handleDelete(item._id)}
-                      />
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
+          {files.length == 0 ? (
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "2rem",
+                fontStyle: "italic",
+                color: "blue"
+              }}
+            >
+              Ooooh Sorry !!! <br /> No matching record found in your search
+            </p>
+          ) : (
+            <Table striped responsive>
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>
+                    <TfiEmail className="statistics-icon" />
+                  </th>
+                  <th>
+                    <FiDownload />
+                  </th>
+                  <th>View</th>
+                  <th>Send</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {files.map((item) => {
+                  return (
+                    <tr key={item._id}>
+                      <td>1</td>
+                      <td>{item.title}</td>
+                      <td>{item.description}</td>
+                      <td>{item.emails}</td>
+                      <td>{item.downloads}</td>
+                      <td>
+                        <AiFillEye
+                          className="action-icon action-view"
+                          onClick={() => handlePreview(item.file)}
+                        />
+                      </td>
+                      <td>
+                        <Link to={`/file/send/email/${item._id}`}>
+                          <AiOutlineSend className="action-icon action-send" />
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to={`/file/edit/${item._id}`}>
+                          <AiFillEdit className="action-icon action-edit" />
+                        </Link>
+                      </td>
+                      <td>
+                        <AiFillDelete
+                          className="action-icon action-delete"
+                          onClick={() => handleDelete(item._id)}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          )}
         </Container>
       </div>
     </>

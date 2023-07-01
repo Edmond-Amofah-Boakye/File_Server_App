@@ -48,7 +48,7 @@ const AppContext = ({ children }) => {
 
 
   return (
-    <Context.Provider value={{ role, setRole, getMe, getUsers, getFiles, setGetFiles, search, setSearch }}>{children}</Context.Provider>
+    <Context.Provider value={{ role, setRole, getMe, getUsers, setGetUsers, getFiles, setGetFiles, search, setSearch }}>{children}</Context.Provider>
   );
 };
 

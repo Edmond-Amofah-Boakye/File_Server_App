@@ -33,7 +33,7 @@ const HomepageMain = () => {
       </Container>
       <div className="file-types">
         <Container>
-          <Row>
+          <Row className="file-types-item">
             <Col md={3}>
               <div className="videos-icon-info">
                 <div className="video-icon">
