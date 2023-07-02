@@ -11,6 +11,8 @@ const SendFile = () => {
   const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
   const [body, setBody] = useState("");
+  const [filename, setFilename] = useState("");
+
 
   //fetch file
   useEffect(() => {
@@ -18,6 +20,7 @@ const SendFile = () => {
       .get(`${server}/file/${id}`, config)
       .then((res) => {
         setTitle(res.data.file.title);
+        setFilename(res.data.file.file);
       })
       .catch((error) => {
         console.log(error);
@@ -26,14 +29,14 @@ const SendFile = () => {
 
   const data ={
     email,
-    filemessage: body
+    message: body
   }
 //send file
 
 const handleSubmit = (e) =>{
     e.preventDefault()
 
-    axios.post(`${server}/file/email/${id}`, data, config).then((res)=>{
+    axios.post(`${server}/file/email/${filename}`, data, config).then((res)=>{
       swal.fire({
         icon: "success",
         title: `${res.data.message}`,
@@ -45,14 +48,6 @@ const handleSubmit = (e) =>{
       })
     })
 }
-
-
-
-
-
-
-
-
 
   return (
     <>

@@ -6,6 +6,8 @@ import errorMiddleware from "./middleware/error.js";
 import connection from "./database/db.js";
 import express from "express";
 import cors from "cors";
+import rateLimit from 'express-rate-limit';
+import mongoSanitize from 'express-mongo-sanitize';
 import cookieParser from 'cookie-parser';
 import morgan from "morgan";
 import helmet from "helmet";
@@ -25,6 +27,20 @@ process.on("uncaughtException", ()=>{
 //usimg helmet middleware
 app.use(helmet())
 
+
+//to prevent too many request from one IP Address
+const limit = rateLimit({
+    max: 100,
+    windowMs: 60 * 60 * 1000,
+    message: "too many request from this IP"
+})
+
+app.use('/api', limit)
+
+
+
+
+
 //using cors middleware
 app.use(cors({
     origin: "http://localhost:5173",
@@ -40,6 +56,10 @@ app.use(cookieParser())
 app.use(express.json({limit: "10kb"}))
 app.use(express.urlencoded({extended: true}))
 app.use(express.static("./uploads"))
+
+
+//prevent NoSQL injection
+app.use(mongoSanitize())
 
 
 //route middleware

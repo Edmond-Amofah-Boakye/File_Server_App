@@ -1,4 +1,4 @@
-import sendEmail from "../utils/SendEmail.js";
+import sendEmail from "../utils/sendMail.js";
 import userModel from "../model/UserModel.js";
 import tokenSchema from '../model/TokenModel.js'
 import AppError from '../utils/AppError.js'
@@ -37,14 +37,14 @@ export async function createUser(req, res, next) {
     //sending email
     const userName = user.name.split(" ")[0]
     const url = `http://localhost:5173/verify/${newToken.confirmationToken}`
-    new sendEmail(user.email, url, userName).verifyEmail()
+    new sendEmail(user.email, userName, url).verifyEmail()
        
     res.status(201).json({
       message: "Sucess, activate your account through your email",
       user,
     });
   } catch (error) {
-    next(console.log(error));
+    next(error);
   }
 }
 
@@ -104,6 +104,6 @@ export async function deleteUser(req, res, next){
       })
 
   } catch (error) {
-    
+    next(error)
   }
 }

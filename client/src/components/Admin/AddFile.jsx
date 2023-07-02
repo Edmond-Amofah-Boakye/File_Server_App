@@ -8,13 +8,8 @@ import axios from 'axios'
 import swal from "sweetalert2";
 import "../../styles/Admin/AddFiles.css";
 
-
-
-
-
 const AddFile = () => {
   const { getFiles, setGetFiles } = useContext(Context)
-
 
   const [selectFile, setSelectFile] = useState("");
   const [title, setTitle] = useState("");
@@ -79,8 +74,8 @@ const AddFile = () => {
             </select>
           </div>
           <div className="file-title">
-            <label className="mb-4 text-primary" htmlFor="choose-image">
-              Select File <AiOutlineFileImage />
+            <label className="mb-4 text-primary selcet-file" htmlFor="choose-image">
+              Select File - File size shlould not be more that 5MB<AiOutlineFileImage />
             </label>
             <input
               type="file"

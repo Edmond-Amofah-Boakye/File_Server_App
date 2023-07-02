@@ -43,9 +43,7 @@ const FilesCard = ({ files }) => {
         console.error('Error fetching file:', error);
       });
 
-
   }
-
 
 
   return (

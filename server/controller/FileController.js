@@ -3,7 +3,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import FileModel from '../model/FileModel.js'
 import AppError from '../utils/AppError.js';
-import sendEmail from '../utils/SendEmail.js';
+import sendFile from '../utils/SendFile.js';
 import APIFeatures from '../utils/APIFeatures.js';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -167,37 +167,41 @@ export async function updateFile(req, res, next){
     }
   }
 
-  //send file to email
+ //Sending file to an email
+ 
   export async function sendFiletoEmail(req, res, next){
-    const { email, filemessage } = req.body
+    const { email, message } = req.body
+    const { filename} = req.params
     try {
 
-      const fileExists = await FileModel.findById(req.params.id)
+      const fileExists = await FileModel.findOne({file: filename})
       if(!fileExists){
         return next(new AppError("no file found", 404))
       }
 
       //reading file
-      let attach = fs.readFileSync(path.join(__dirname, `../uploads/${fileExists.file}`)).toString("base64")
-      const fileType = fileExists.file.split('.');
-      const fileSize = `application/${fileType[fileType.length - 1]}`
+      const filePath = path.join(__dirname, "../uploads", filename)
 
+       console.log(filePath);
       //send file
-      new sendEmail(email).sendFile(filemessage , attach, fileExists.file, fileSize )
+      try {
+        sendFile(email, message, filename, filePath)
+        //increasing file email count
+        fileExists.emails+=1;
+        await fileExists.save()
+  
+        res.status(201).json({
+          message: "file sucessfully sent"
+        })
+        
+      } catch (error) {
+         next(new AppError("Internal server error", 500));
+      }
 
-      //increasing file email count
-      fileExists.emails+=1;
-      await fileExists.save()
-
-      return res.status(201).json({
-        message: "file sucessfully sent"
-      })
-      
     } catch (error) {
-      next(error)
+      next(new AppError("Internal server error", 500));
     }
   }
-
 
   //search file
 

@@ -50,7 +50,7 @@ function Feeds() {
               fontStyle: "italic",
               color: "blue"
             }}>
-              Ooooh Sorry !!! <br /> No matching record found in your search
+              No files found
             </p>
           ) : (
             <FilesCard files={files} />

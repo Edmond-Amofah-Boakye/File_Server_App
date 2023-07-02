@@ -16,8 +16,6 @@ const Signin = () => {
     password,
   };
 
-  //edmundboakye1622@gmail.com
-
   //handle submit form
   const handleSubmit = (e) => {
     e.preventDefault();

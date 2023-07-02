@@ -5,12 +5,6 @@ import { Context } from '../../store/AppContext'
 import { useContext } from 'react'
 import Chart from './LineChart'
 
-
-
-
-
-
-
 const MainDetails = () => {
     const { getUsers, getFiles } = useContext(Context)
   return (

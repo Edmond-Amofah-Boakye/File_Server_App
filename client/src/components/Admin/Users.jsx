@@ -8,7 +8,7 @@ import swal from "sweetalert2";
 import server from "../Helpers/Server";
 
 const Users = () => {
-  const { getUsers, search, setGetUsers } = useContext(Context);
+  const { getUsers, setGetUsers } = useContext(Context);
 
   //handle delete
   const handleDelete = (id) => {

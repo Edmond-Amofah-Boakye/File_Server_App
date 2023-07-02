@@ -12,7 +12,7 @@ const tokenSchema = new mongoose.Schema({
         type: String
     },
 
-    resetPaddwordToken:{
+    resetPasswordToken:{
         type: String
     },
 
@@ -24,7 +24,7 @@ const tokenSchema = new mongoose.Schema({
 //generate reset token
 tokenSchema.methods.generteReseteToken = function(){
     const token = crypto.randomBytes(32).toString("hex");
-    this.resetPaddwordToken = crypto.createHash("sha256").update(token).digest("hex");
+    this.resetPasswordToken = crypto.createHash("sha256").update(token).digest("hex");
     this.resetPasswordTokenExpiration = Date.now() + 10 * 60 * 1000;
 
     return token;

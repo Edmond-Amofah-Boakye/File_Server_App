@@ -1,4 +1,4 @@
-import sendEmail from "../utils/SendEmail.js";
+import sendEmail from "../utils/sendMail.js";
 import userModel from "../model/UserModel.js";
 import tokenModel from "../model/TokenModel.js";
 import AppError from "../utils/AppError.js";
@@ -87,7 +87,9 @@ export async function verifyEmail(req, res, next) {
     const user = await userModel.findOne({ _id: findToken.id });
 
     //checking if user exists
-    checkUserExists(user)
+    if(!user){
+      return next(new AppError("no user found", 404))
+    }
     
     //set confirmation token to false
     findToken.confirmationToken = undefined;
@@ -113,19 +115,24 @@ export async function forgotPassword(req, res, next) {
     const userExists = await userModel.findOne({ email });
 
     //check if user Exists
-    checkUserExists(userExists)
+    if(!userExists){
+      return next(new AppError("no user found", 404))
+    }
+
     
     const userInTokenModel = await tokenModel.findOne({ id: userExists._id });
 
     //check if user Exists in token model
-    checkUserExists(userInTokenModel)
+    if(!userInTokenModel){
+      return next(new AppError("no user found", 404))
+    }
 
     const token = userInTokenModel.generteReseteToken();
-    await userInTokenModel.save();
+    await userInTokenModel.save(); 
 
     //sending email
-    const url = `http://localhost:5173/password/reset/${userInTokenModel.resetPaddwordToken}`;
-    new sendEmail(userExists.email, url).resetpassword();
+    const url = `http://localhost:5173/password/reset/${userInTokenModel.resetPasswordToken}`;
+    new sendEmail(userExists.email, "", url).resetpassword();
 
     res.status(201).json({
       message: "successful, activate your account through your email",
@@ -142,7 +149,7 @@ export async function resetPassword(req, res, next) {
   try {
     //check token
     const tokenExists = await tokenModel.findOne({
-      resetPaddwordToken: token,
+      resetPasswordToken: token,
       resetPasswordTokenExpiration: { $gt: Date.now() },
     });
     if (!tokenExists) {
@@ -155,7 +162,7 @@ export async function resetPassword(req, res, next) {
     userExists.password = password;
     await userExists.save();
 
-    tokenExists.resetPaddwordToken = undefined;
+    tokenExists.resetPasswordToken = undefined;
     tokenExists.resetPasswordTokenExpiration = undefined;
     await tokenExists.save()
 

@@ -40,7 +40,6 @@ const Settings = () => {
           icon: "success",
           title: `${res.data.message}`,
         });
-        console.log(res);
       }).catch((error)=>{
         swal.fire({
           icon: "error",
@@ -49,9 +48,6 @@ const Settings = () => {
       })
     } 
      
-    
-
-
   return (
     <>
       <div className="settings">

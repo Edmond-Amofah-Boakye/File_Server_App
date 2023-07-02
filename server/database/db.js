@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const connection = () =>{
-   mongoose.connect(process.env.MONGO_URL)
+const connection = async () =>{
+   await mongoose.connect(process.env.MONGO)
     .then((data)=>{
-        console.log(`database sucessfully connected on ${data.connection.host}`);
+        console.log(`database sucessfully connected`);
     })
     .catch((err)=>{
         console.log(`error occured ${err}`);

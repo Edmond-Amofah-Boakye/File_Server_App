@@ -5,7 +5,6 @@ import { MdDashboard } from "react-icons/md";
 import { SiFiles } from "react-icons/si";
 import { HiUsers } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import image1 from "../../assets/default.avif";
 import "../../styles/Admin/Sidebar.css";
 import { useContext } from 'react';
 import { Context } from '../../store/AppContext';

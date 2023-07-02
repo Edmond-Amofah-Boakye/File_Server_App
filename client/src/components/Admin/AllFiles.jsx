@@ -102,7 +102,7 @@ const AllFiles = () => {
                 color: "blue"
               }}
             >
-              Ooooh Sorry !!! <br /> No matching record found in your search
+              No files found
             </p>
           ) : (
             <Table striped responsive>
