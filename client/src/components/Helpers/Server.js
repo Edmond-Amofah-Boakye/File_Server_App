@@ -1,3 +1,3 @@
-const server = "http://localhost:5000/api/v1";
+const server = "https://fileserverapp-api.onrender.com";
 
 export default server;
