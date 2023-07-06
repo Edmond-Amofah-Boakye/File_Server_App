@@ -1,0 +1,1 @@
+This is Full Stack Application Built with React.js For Frontend and Node.js for Backend. It is a File srever applicatiion wgich helps busineses to distributte files to it clients. It contains the user section and the admin section.
