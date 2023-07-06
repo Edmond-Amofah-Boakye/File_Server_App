@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import server from "./Helpers/Server";
 import axios from "axios";
 import swal from "sweetalert2";
 
 const SendFile = () => {
   const { id } = useParams();
-  const config = { withCredentials: true };
+  const navigate = useNavigate();
+  
+  //configuration
+ const config = {headers:{
+  "Authorization": `Bearer ${localStorage.getItem("token")}`
+}}
 
   const [title, setTitle] = useState("");
   const [email, setEmail] = useState("");
@@ -41,6 +46,7 @@ const handleSubmit = (e) =>{
         icon: "success",
         title: `${res.data.message}`,
       })
+      navigate("/feeds")
     }).catch((error)=>{
       swal.fire({
         icon: "error",

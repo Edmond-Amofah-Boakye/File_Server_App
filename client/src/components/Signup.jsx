@@ -21,14 +21,13 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${server}/user`, data, { withCredentials: true })
+      .post(`${server}/user`, data)
       .then((res) => {
         swal.fire({
           icon: "success",
           title: `${res.data.message}`,
         });
-        setName(" ");
-        setEmail(" ");
+        setEmail("");
         setPassword("");
       })
       .catch((error) => {

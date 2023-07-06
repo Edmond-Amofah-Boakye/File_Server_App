@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { AiOutlineArrowLeft, AiOutlineFileImage } from "react-icons/ai";
-import { Link, useParams} from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import server from '../Helpers/Server'
 import axios from 'axios'
 import swal from "sweetalert2";
 import "../../styles/Admin/AddFiles.css";
 
 
-
-
-
 const AddFile = () => {
+  const navigate = useNavigate();
   const { id } = useParams()
-  const config = { withCredentials: true };
+  
+   //configuration
+ const config = {headers:{
+  "Authorization": `Bearer ${localStorage.getItem("token")}`
+}}
 
   const [selectFile, setSelectFile] = useState("");
   const [title, setTitle] = useState("");
@@ -50,6 +52,7 @@ const AddFile = () => {
           icon: "success",
           title: `${res.data.message}`,
         })
+        navigate("/admin/dashboard/files")
       }).catch((error)=>{
         swal.fire({
           icon: "error",

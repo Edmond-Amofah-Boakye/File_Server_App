@@ -9,7 +9,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-
 const filterObject = (obj, ...allowedFields) =>{
     const newObj = {}
     Object.keys(obj).forEach(field=>{
@@ -31,8 +30,9 @@ export async function createFile(req, res, next) {
       file: req.file.filename,
       createdBy: req.user.id
     });
-  
+    
     try {
+
       if(!createdFile){
           return next(new AppError("could not create file", 500))
       }
@@ -43,6 +43,9 @@ export async function createFile(req, res, next) {
         createdFile,
       });
     } catch (error) {
+        if(req.file){
+          fs.unlinkSync(req.file.path)
+        }
       next(error);
     }
   }
@@ -249,3 +252,12 @@ export async function updateFile(req, res, next){
     }
 
   }
+
+
+
+
+
+
+
+
+  

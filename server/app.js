@@ -38,14 +38,21 @@ const limit = rateLimit({
 app.use('/api', limit)
 
 
-
-
-
 //using cors middleware
 app.use(cors({
     origin: "http://localhost:5173",
-    credentials: true
-}))
+    credentials: true,
+    methods: ["GET", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
+    allowedHeaders:[
+        "Access-Control-Allow-Origin",
+        "Content-Type",
+        "Authorization"
+    ],
+}));
+
+app.set("trust proxy", 1);
+
+
 
 //using morgan middleware
 if(process.env.NODE_ENV === "development"){

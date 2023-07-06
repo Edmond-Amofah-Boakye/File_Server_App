@@ -2,13 +2,14 @@ import { useState, useContext } from "react";
 import { Context } from "../../store/AppContext";
 import { Container } from "react-bootstrap";
 import { AiOutlineArrowLeft, AiOutlineFileImage } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import server from '../Helpers/Server'
 import axios from 'axios'
 import swal from "sweetalert2";
 import "../../styles/Admin/AddFiles.css";
 
 const AddFile = () => {
+  const navigate = useNavigate();
   const { getFiles, setGetFiles } = useContext(Context)
 
   const [selectFile, setSelectFile] = useState("");
@@ -16,6 +17,10 @@ const AddFile = () => {
   const [file, setFile] = useState("");
   const [description, setDescription] = useState("");
 
+ //configuration
+ const config = {headers:{
+  "Authorization": `Bearer ${localStorage.getItem("token")}`
+}}
 
   const handleSubmit = async (e) =>{
     e.preventDefault()
@@ -27,12 +32,13 @@ const AddFile = () => {
     formData.append("file", file)
 
     try {
-      axios.post(`${server}/file/create`, formData, {withCredentials: true}).then((res)=>{
+      axios.post(`${server}/file/create`, formData, config).then((res)=>{
         swal.fire({
           icon: "success",
           title: `${res.data.message}`,
         })
         setGetFiles([...getFiles, res.data.createdFile])
+        navigate("/admin/dashboard/files")
       })
 
     } catch (error) {

@@ -1,13 +1,19 @@
 import "../../styles/Admin/Settings.css";
 import defaultImage from "../../assets/default.avif";
 import server from "../Helpers/Server";
+import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert2";
 import { AiOutlineFileImage } from "react-icons/ai";
 
 const Settings = () => {
-  const config = { withCredentials: true };
+  const navigate = useNavigate();
+
+   //configuration
+ const config = {headers:{
+  "Authorization": `Bearer ${localStorage.getItem("token")}`
+}}
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -40,6 +46,8 @@ const Settings = () => {
           icon: "success",
           title: `${res.data.message}`,
         });
+        navigate("/admin/dashboard/users")
+        
       }).catch((error)=>{
         swal.fire({
           icon: "error",

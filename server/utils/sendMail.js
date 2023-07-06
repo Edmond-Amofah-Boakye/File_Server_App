@@ -8,14 +8,21 @@ class SendMail{
         this.from = process.env.EMAIL
     }
 
+    // host: 'smtp.gmail.com',
+    // port: 465,
+    // secure: true,
+    // auth: {
+    //   user: process.env.EMAIL,
+    //   pass: process.env.USER_PASSWORD,
+    // },
+
+
     createTransport(){
         return nodemailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 465,
-            secure: true,
+            service: "SendGrid",
             auth: {
-              user: process.env.EMAIL,
-              pass: process.env.USER_PASSWORD,
+              user: process.env.SENDGRID_NAME,
+              pass: process.env.SENDGRID_API,
             },
         })
     }
@@ -86,7 +93,7 @@ class SendMail{
               >RESET</button></a>
             </center>
         `
-        await this.send("Password Verification", message)
+        await this.send("Password Reset", message)
       }
 
 }
