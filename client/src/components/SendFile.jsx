@@ -25,7 +25,7 @@ const SendFile = () => {
       .get(`${server}/file/${id}`, config)
       .then((res) => {
         setTitle(res.data.file.title);
-        setFilename(res.data.file.file);
+        setFilename(res.data.file.filename);
       })
       .catch((error) => {
         console.log(error);

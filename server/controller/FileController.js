@@ -1,10 +1,10 @@
-import fs from 'fs'
-import path from 'path'
-import { fileURLToPath } from 'url'
 import FileModel from '../model/FileModel.js'
 import AppError from '../utils/AppError.js';
 import sendFile from '../utils/SendFile.js';
 import APIFeatures from '../utils/APIFeatures.js';
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -25,9 +25,10 @@ export async function createFile(req, res, next) {
 
     const createdFile = new FileModel({
       title,
+      filename: req.file.filename,
       description,
       type,
-      file: req.file.filename,
+      file: req.file.path,
       createdBy: req.user.id
     });
     
@@ -149,7 +150,7 @@ export async function updateFile(req, res, next){
   export async function downloadFile(req, res, next){
     const { filename } = req.params;
     try {
-        const fileExists = await FileModel.findOne({file:filename})
+        const fileExists = await FileModel.findOne({filename})
         if(!fileExists){
             return next(new AppError("no file found", 404))
         }
@@ -177,13 +178,13 @@ export async function updateFile(req, res, next){
     const { filename} = req.params
     try {
 
-      const fileExists = await FileModel.findOne({file: filename})
+      const fileExists = await FileModel.findOne({filename})
       if(!fileExists){
         return next(new AppError("no file found", 404))
       }
 
       //reading file
-      const filePath = path.join(__dirname, "../uploads", filename)
+      const filePath = path.join(__dirname, "../uploads", fileExists.filename)
 
        console.log(filePath);
       //send file
@@ -236,16 +237,19 @@ export async function updateFile(req, res, next){
   export async function previewFile(req, res, next){
     const { filename } = req.params;
     try {
-        const fileExists = await FileModel.findOne({file:filename})
+        const fileExists = await FileModel.findOne({filename})
         if(!fileExists){
             return next(new AppError("no file found", 404))
         }
     
-        const filePath = path.join(__dirname, "../uploads", filename)
-        
-        res.set("Content-Disposition", "inline")
-
+        const filePath = path.join(__dirname, `../uploads/${fileExists.filename}`)
+       
+        res.set({
+          'Content-Disposition': 'inline'
+        });
+    
         res.sendFile(filePath)
+
         
     } catch (error) {
         next(error)

@@ -45,7 +45,7 @@ const AddFile = () => {
       console.log(error);
       swal.fire({
         icon: "error",
-        title: `${error.response.data.message}`,
+        title: `error`,
     })}}
 
   return (
@@ -73,6 +73,7 @@ const AddFile = () => {
               required
               onChange={(e) => setSelectFile(e.target.value)}
             >
+              <option value="video">Choose File</option>
               <option value="video">video</option>
               <option value="audio">audio</option>
               <option value="pdf">pdf</option>
@@ -81,7 +82,7 @@ const AddFile = () => {
           </div>
           <div className="file-title">
             <label className="mb-4 text-primary selcet-file" htmlFor="choose-image">
-              Select File - File size shlould not be more that 5MB<AiOutlineFileImage />
+              Select File - File size shlould not be more that 25MB<AiOutlineFileImage />
             </label>
             <input
               type="file"

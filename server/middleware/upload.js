@@ -1,3 +1,8 @@
+import fs from 'fs'
+import path from 'path'
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 import AppError from '../utils/AppError.js'
 import multer from 'multer';
 
@@ -9,7 +14,7 @@ const multerStorage = multer.diskStorage({
 
     filename: (req, file, cb)=>{
         const ext = file.mimetype.split("/")[1]
-        cb(null, `user-${req.user._id}-${Date.now()}.${ext}`)
+        cb(null, Date.now() + path.extname(file.originalname))
     }
 })
 
@@ -29,7 +34,7 @@ const upload = multer({
     storage: multerStorage,
     fileFilter: fileFilter,
     limits: {
-        fileSize: 1 * 1024 * 1024 * 1024// max file size 2GB = 
+        fileSize: 25 * 1024 * 1024, // 25MB in bytes
       },
 })
 
